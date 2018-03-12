@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <title>Javascript ASCII Engine</title>
+<style>
+  body {
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+  }
+
+  .button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #005c99;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+
+  .button:hover {background-color: #008ae6}
+  .button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+</style>
+</head>
+<body bgcolor="#cccccc" onload="clearOnReload()">
+
+<SCRIPT LANGUAGE="JavaScript">
+
+//Javascript Ascii Engine
+//Written by Christopher Nielsen
+//Jan 11, 2000
+
+// Reset all fields to blank whenever page reloads
+function clearOnReload() {
+    document.forms['asciiform'].reset();
+}
+
+binary_numbers = new Array("0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111",
+                           "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111");
+
+function toAscii ()  {
+    var symbols = " !\"#$%&'()*+,-./0123456789:;<=>?@"
+    var loAZ = "abcdefghijklmnopqrstuvwxyz"
+      symbols+= loAZ.toUpperCase()
+      symbols+= "[\\]^_`"
+      symbols+= loAZ
+      symbols+= "{|}~"
+    var  loc = symbols.indexOf(document.asciiform.Input.value)
+    if (loc > -1)
+    {
+        Ascii_Decimal = 32 + loc;
+        return (32 + loc);
+    }
+    return(0) // If not in range 32-126 return ZERO
+}
+
+function Dec2Hex(Decimal) {
+    var hexChars = "0123456789ABCDEF";
+    var a = Decimal % 16;
+    var b = (Decimal - a)/16;
+    hex = "" + hexChars.charAt(b) + hexChars.charAt(a);
+    L = hexChars.charAt(a);
+    H = hexChars.charAt(b);
+    return hex;
+}
+
+function toBinary(High, Low) {
+    var hiHex = "ABCDEF";
+    if(Low < 10 ){ LowNib = Low }
+    else { LowNib = 10 + hiHex.indexOf(Low); }
+    if(High  < 10 ){ HighNib = High }
+    else { HighNib = 10 + hiHex.indexOf(High); }
+    eight_bits = binary_numbers[HighNib] + " " + binary_numbers[LowNib];
+    return eight_bits;
+}
+
+function getConversions(some_value) {
+    document.asciiform.toDec.value=toAscii();
+    document.asciiform.toHex.value=Dec2Hex(toAscii());
+    document.asciiform.binary.value=toBinary(H, L);
+}
+
+</script>
+<br>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=4 >
+  <TR>
+    <TD><center><FONT SIZE=+2><B>Javascript ASCII Engine</B></FONT></center><HR WIDTH=90%>
+      <FORM NAME="asciiform" onsubmit="return false">
+        <INPUT SIZE="1" NAME="Input" style="font-size:30pt; width: 50px; height: 50px;" MAXLENGTH="1" autofocus="autofocus" onChange="getConversions(this.value)">&nbsp;&nbsp;&nbsp;Input one keyboard char (only one)
+        <BR><BR><INPUT SIZE="10" NAME="toDec" style="font-size:14pt; font-family: 'Roboto', sans-serif;" onFocus=this.blur()>&nbsp;&nbsp;&nbsp;Output ASCII decimal value
+        <BR><INPUT SIZE="10" NAME="toHex" style="font-size:14pt; font-family: 'Roboto', sans-serif;" onFocus=this.blur()>&nbsp;&nbsp;&nbsp;Output ASCII hex value
+        <BR><INPUT SIZE="10" NAME="binary" style="font-size:14pt; font-family: 'Roboto', sans-serif;" onFocus=this.blur()>&nbsp;&nbsp;&nbsp;Output ASCII binary value
+        <BR><BR>
+
+        <TABLE BORDER=0 width=100% >
+          <TR>
+            <TD align=center>
+                <center><INPUT TYPE="button" class="button" VALUE="DISPLAY EQUIVALENTS" onClick="document.asciiform.toDec.value=toAscii()"></center>
+                <BR>
+            </TD>
+          </TR>
+        </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+</body>
+</html>
