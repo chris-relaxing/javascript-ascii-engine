@@ -9,12 +9,14 @@ Written with:
 * HTML
 * CSS
 
+![alt text](http://bluegalaxy.info/codewalk/wp-content/uploads/2017/11/ascii-engine.png)
+
 This app can be viewed on my website here:<BR>
 http://bluegalaxy.info/js/ascii_engine.html
 
-I also wrote an article about it on my blog, here:
+I also wrote an article about it on my blog, here:<BR>
 http://bluegalaxy.info/codewalk/2017/11/16/javascript-web-app-javascript-ascii-engine/
 
-![alt text](http://bluegalaxy.info/codewalk/wp-content/uploads/2017/11/ascii-engine.png)
+
 
 
